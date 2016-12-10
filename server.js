@@ -28,11 +28,12 @@ app.post('/webhook/', function (req, res) {
         sendGenericMessage(sender)
         continue
       }
-      sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
+      //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
+      // start recive calculate
+      let cal = text.split(' ') // ตัดช่องว่าง
+      sendTextMessage(sender,parseInt(cal[0]) + parseInt(cal[1]))
+
     }
-    // start recive calculate
-    let cal = text.split(' ') // ตัดช่องว่าง
-    sendTextMessage(sender,parseInt(cal[0]) +parseInt(cal[1]))
 
     if (event.postback) {
       let text = JSON.stringify(event.postback)
