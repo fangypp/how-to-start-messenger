@@ -31,8 +31,8 @@ app.post('/webhook/', function (req, res) {
       sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
     }
     // start recive calculate
-    let text = text.split(' ') // ตัดช่องว่าง
-    sendTextMessage(sender,parseInt(text[0]) +parseInt(text[1]))
+    let cal = text.split(' ') // ตัดช่องว่าง
+    sendTextMessage(sender,parseInt(cal[0]) +parseInt(cal[1]))
 
     if (event.postback) {
       let text = JSON.stringify(event.postback)
