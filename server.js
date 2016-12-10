@@ -31,7 +31,7 @@ app.post('/webhook/', function (req, res) {
       //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
       // start recive calculate
       let cal = text.split(' ') // ตัดช่องว่าง
-      sendTextMessage(sender,parseInt(cal[0]) + parseInt(cal[1]))
+      sendTextMessage(sender, parseInt(cal[0]) + parseInt(cal[1]))
 
     }
 
