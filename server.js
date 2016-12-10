@@ -31,15 +31,16 @@ app.post('/webhook/', function (req, res) {
       sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
     }
     // start recive calculate
-    let text = text.splice(' ') // ตัดช่องว่าง
-
-    let cin =sendTextMessage(sender,parseInt(text[0]) +parseInt(text[1]))
     if (event.postback) {
       let text = JSON.stringify(event.postback)
       sendTextMessage(sender, 'Postback received: ' + text.substring(0, 200), token)
       continue
     }
   }
+  let text = text.splice(' ') // ตัดช่องว่าง
+
+  let cin =sendTextMessage(sender,parseInt(text[0]) +parseInt(text[1]))
+
   res.sendStatus(200)
 })
 
