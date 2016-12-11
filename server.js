@@ -35,14 +35,14 @@ app.post('/webhook/', function (req, res) {
               //sendTextMessage (sender, count)
               var cityName=text.substring(8, count)
               sendTextMessage (sender, cityName)
-              var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid='+apiId
+              var urlWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid='+apiId
               request({
-                url: weatherEndpoint,
+                url: urlWeather,
                 json: true
               }, function(error, response, body) {
                 try {
-                  var condition = body.main;
-                  sendTextMessage(sender, "Today is " + condition.temp + "Celsius in " + location);
+                  var con = body.main;
+                  sendTextMessage(sender, "Today is " + con.temp + "Celsius in " + cityName);
                 } catch(err) {
                   console.error('error caught', err);
                   sendTextMessage(sender, "There was an error.");
