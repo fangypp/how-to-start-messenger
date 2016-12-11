@@ -35,7 +35,7 @@ app.post('/webhook/', function (req, res) {
               //sendTextMessage (sender, count)
               var cityName=text.substring(8, count)
               sendTextMessage (sender, cityName)
-              var urlWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
+              var urlWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+'&units=metric&appid=ea5272e74853f242bc0efa9fef3dd9f3'
               request({
                 url: urlWeather,
                 json: true
