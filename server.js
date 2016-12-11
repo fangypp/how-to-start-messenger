@@ -26,18 +26,8 @@ let event = req.body.entry[0].messaging[i]
 let sender = event.sender.id
 if (event.message && event.message.text) {
 let text = event.message.text
-if (text.substring(0, 7) === 'Weather') {
-              var count =text.length
-              //sendTextMessage (sender, "อากาศตอนนี้หนาว")
-              //sendTextMessage (sender, count)
-              var cityName=text.substring(8, count)
-              //sendTextMessage (sender, cityName)
-
-              continue
-
-//var cityName = event.message.text
+var cityName = event.message.text
 var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
-}
 request({
         url: weatherUrl,
         json: true
