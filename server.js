@@ -1,5 +1,5 @@
 'use strict'
-const apiId='c28a1e1302889f5897d546507cbbf75a'
+//const apiId='c28a1e1302889f5897d546507cbbf75a'
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -35,7 +35,7 @@ app.post('/webhook/', function (req, res) {
               //sendTextMessage (sender, count)
               var cityName=text.substring(8, count)
               sendTextMessage (sender, cityName)
-              var urlWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid='+apiId
+              var urlWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
               request({
                 url: urlWeather,
                 json: true
