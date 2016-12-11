@@ -1,5 +1,5 @@
 'use strict'
-
+const apiId='c28a1e1302889f5897d546507cbbf75a'
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -35,8 +35,20 @@ app.post('/webhook/', function (req, res) {
               //sendTextMessage (sender, count)
               var cityName=text.substring(8, count)
               sendTextMessage (sender, cityName)
-              app.get('openweather bla bla', function (req,res) {
-              console.log(req)
+              var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid='+apiId
+              request({
+                url: weatherEndpoint,
+                json: true
+              }, function(error, response, body) {
+                try {
+                  var condition = body.main;
+                  sendTextMessage(sender, "Today is " + condition.temp + "Celsius in " + location);
+                } catch(err) {
+                  console.error('error caught', err);
+                  sendTextMessage(sender, "There was an error.");
+                }
+              })
+            }
               }
               continue
             }
@@ -44,8 +56,8 @@ app.post('/webhook/', function (req, res) {
       // start recive calculate
       //let cal = text.split(' ') // ตัดช่องว่าง
       //sendTextMessage(sender, parseInt(cal[0]) + parseInt(cal[1]))//แปลง
+//var location = event.message.text
 
-    }
 
     if (event.postback) {
       let text = JSON.stringify(event.postback)
