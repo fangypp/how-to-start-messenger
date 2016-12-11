@@ -1,6 +1,5 @@
 'use strict'
 //const apiId='c28a1e1302889f5897d546507cbbf75a'
-const apiId = 'c28a1e1302889f5897d546507cbbf75a'
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -28,7 +27,7 @@ let sender = event.sender.id
 if (event.message && event.message.text) {
 let text = event.message.text
 var cityName = event.message.text
-var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=' +apiId
+var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
 request({
         url: weatherUrl,
         json: true
