@@ -26,18 +26,18 @@ let event = req.body.entry[0].messaging[i]
 let sender = event.sender.id
 if (event.message && event.message.text) {
 let text = event.message.text
-var location = event.message.text
-var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' +location+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
+var cityName = event.message.text
+var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
 request({
-        url: weatherEndpoint,
+        url: weatherUrl,
         json: true
       }, function(error, response, body) {
 try {
-var condition = body.main;
-sendTextMessage(sender, "วันนี้ อุณหภูมิ " + condition.temp + " °C  " + "ความชื้น " + condition.humidity + " % ที่ " + location);
+var con = body.main;
+sendTextMessage(sender, "Today temporary " + con.temp + " °C  " + "humidity is " + con.humidity + " % ที่ " + cityName);
         } catch(err) {
 console.error('error caught', err);
-sendTextMessage(sender, "โปรดใส่ชื่อเมืองให้ถูกต้อง(ยกตัวอย่างเช่น ฺBangkok )");
+sendTextMessage(sender, "please insert correctly city ");
         }
       })
     }
