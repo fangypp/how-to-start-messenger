@@ -18,56 +18,37 @@ app.get('/webhook/', function (req, res) {
   }
   res.send('Error, wrong token')
 })
+
 app.post('/webhook/', function (req, res) {
-  let messaging_events = req.body.entry[0].messaging
-  for (let i = 0; i < messaging_events.length; i++) {
-    let event = req.body.entry[0].messaging[i]
-    let sender = event.sender.id
-    if (event.message && event.message.text) {
-      let text = event.message.text
-      if (text === 'Generic') {
-              sendGenericMessage(sender)
-              continue
-            }
-      if (text.substring(0, 7) === 'weather') {
-              var count =text.length
-              sendTextMessage (sender, "อากาศตอนนี้หนาว")
-              //sendTextMessage (sender, count)
-              var cityName=text.substring(8, count)
-              sendTextMessage (sender, cityName)
-              var urlWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+'&units=metric&appid=ea5272e74853f242bc0efa9fef3dd9f3'
-              request({
-                url: urlWeather,
-                json: true
-              }, function(error, response, body) {
-                try {
-                  var con = body.main;
-                  sendTextMessage(sender, "Today is " + con.temp + "Celsius in " + cityName);
-                } catch(err) {
-                  console.error('error caught', err);
-                  sendTextMessage(sender, "There was an error.");
-                }
-              })
-            }
-              }
-              continue
-            }
-      //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
-      // start recive calculate
-      //let cal = text.split(' ') // ตัดช่องว่าง
-      //sendTextMessage(sender, parseInt(cal[0]) + parseInt(cal[1]))//แปลง
-//var location = event.message.text
-
-
-    if (event.postback) {
-      let text = JSON.stringify(event.postback)
-      sendTextMessage(sender, 'Postback received: ' + text.substring(0, 200), token)
-      continue
+let messaging_events = req.body.entry[0].messaging
+for (let i = 0; i < messaging_events.length; i++) {
+let event = req.body.entry[0].messaging[i]
+let sender = event.sender.id
+if (event.message && event.message.text) {
+let text = event.message.text
+var location = event.message.text
+var weatherEndpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' +location+ '&units=metric&appid=ea5272e74853f242bc0efa9fef3dd9f3'
+request({
+        url: weatherEndpoint,
+        json: true
+      }, function(error, response, body) {
+try {
+var condition = body.main;
+sendTextMessage(sender, "วันนี้ อุณหภูมิ " + condition.temp + " °C  " + "ความชื้น " + condition.humidity + " % ที่ " + location);
+        } catch(err) {
+console.error('error caught', err);
+sendTextMessage(sender, "โปรดใส่ชื่อเมืองให้ถูกต้อง(ยกตัวอย่างเช่น ฺBangkok )");
+        }
+      })
+    }
+if (event.postback) {
+let text = JSON.stringify(event.postback)
+sendTextMessage(sender, 'Postback received: ' + text.substring(0, 200), token)
+continue
     }
   }
-  res.sendStatus(200)
+res.sendStatus(200)
 })
-
 
 function sendTextMessage (sender, text) {
   let messageData = { text: text }
