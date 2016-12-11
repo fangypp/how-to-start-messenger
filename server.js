@@ -35,7 +35,9 @@ app.post('/webhook/', function (req, res) {
               //sendTextMessage (sender, count)
               var cityName=text.substring(8, count)
               sendTextMessage (sender, cityName)
-              
+              app.get('openweather bla bla', function (req,res) {
+              console.log(req)
+              }
               continue
             }
       //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
