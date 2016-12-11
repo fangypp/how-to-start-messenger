@@ -29,11 +29,8 @@ app.post('/webhook/', function (req, res) {
               sendGenericMessage(sender)
               continue
             }
-
       if (text.substring(0, 7) === 'Weather') {
-              let count =text.length()
               sendTextMessage (sender, "อากาศตอนนี้หนาว")
-              sendTextMessage (sender, count)
               continue
             }
       //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
@@ -51,11 +48,6 @@ app.post('/webhook/', function (req, res) {
   }
   res.sendStatus(200)
 })
-function sendWeather(cityName, countryCode){
-  console.log(cityName)
-  console.log(countryCode)
-
-}
 function sendTextMessage (sender, text) {
   let messageData = { text: text }
   request({
