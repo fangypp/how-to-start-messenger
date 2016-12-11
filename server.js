@@ -25,13 +25,18 @@ app.post('/webhook/', function (req, res) {
     if (event.message && event.message.text) {
       let text = event.message.text
       if (text === 'Generic') {
-        sendGenericMessage(sender)
-        continue
-      }
-      sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
+              sendGenericMessage(sender)
+              continue
+            }
+
+      if (text.substring(0, 7) === 'Weather') {
+              sendTextMessage (sender, "อากาศตอนนี้หนาว")
+              continue
+            }
+      //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
       // start recive calculate
-      // let cal = text.split(' ') // ตัดช่องว่าง
-      // sendTextMessage(sender, parseInt(cal[0]) + parseInt(cal[1]))//แปลง string to int
+      let cal = text.split(' ') // ตัดช่องว่าง
+      sendTextMessage(sender, parseInt(cal[0]) + parseInt(cal[1]))//แปลง
 
     }
 
