@@ -30,7 +30,9 @@ app.post('/webhook/', function (req, res) {
               continue
             }
       if (text.substring(0, 7) === 'Weather') {
+              var count =text.length
               sendTextMessage (sender, "อากาศตอนนี้หนาว")
+              sendTextMessage (sender, count)
               continue
             }
       //sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
