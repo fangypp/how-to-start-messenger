@@ -20,14 +20,17 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.post('/webhook/', function (req, res) {
+sendTextMessage(sender, "Hello test");  
 let messaging_events = req.body.entry[0].messaging
 for (let i = 0; i < messaging_events.length; i++) {
 let event = req.body.entry[0].messaging[i]
 let sender = event.sender.id
 if (event.message && event.message.text) {
 let text = event.message.text
+
+
 var cityName = event.message.text
-var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a'
+var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=' +cityName+ '&units=metric&appid=c28a1e1302889f5897d546507cbbf75a' 
 request({
         url: weatherUrl,
         json: true
@@ -40,15 +43,24 @@ console.error('error caught', err);
 sendTextMessage(sender, "please insert correctly city ");
         }
       })
-    }
+end request
+//21-3-2017
+
+// switch(text)
+//   case 'command' 
+//     sendTextMessage(sender, "todo list");
+//     }
+
+//end 27/3/2017
 if (event.postback) {
 let text = JSON.stringify(event.postback)
 sendTextMessage(sender, 'Postback received: ' + text.substring(0, 200), token)
 continue
     }
-  }
+  }//end line 24
 res.sendStatus(200)
-})
+})//end app.post('/webhook/', function (req, res) {
+
 
 function sendTextMessage (sender, text) {
   let messageData = { text: text }
