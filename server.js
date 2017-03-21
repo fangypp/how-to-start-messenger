@@ -38,10 +38,10 @@ request({
       }, function(error, response, body) {
 try {
 var con = body.main;
-sendTextMessage(sender, "Today temporary " + con.temp + " °C  " + "-- at " + cityName);
+sendTextMessage(sender, "Response ok : "+cityName);
         } catch(err) {
 console.error('error caught', err);
-sendTextMessage(sender, "please insert correctly city ");
+sendTextMessage(sender, "Can't Response :");
         }
       })
 //end request
