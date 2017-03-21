@@ -44,7 +44,7 @@ console.error('error caught', err);
 sendTextMessage(sender, "please insert correctly city ");
         }
       })
-end request
+//end request
 //21-3-2017
 
 // switch(text)
